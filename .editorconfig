@@ -1,0 +1,20 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# トップレベルの設定ファイルであることを示す
+root = true
+
+[*]
+# インデントスタイルをスペースに設定
+indent_style = space
+# インデント幅を2に設定
+indent_size = 2
+# タブ幅を2に設定
+tab_width = 2
+# 改行コードをLFに設定
+end_of_line = lf
+# 文字コードをUTF-8に設定
+charset = utf-8
+# 行末の空白を削除
+trim_trailing_whitespace = true
+# ファイル末尾に空行を追加
+insert_final_newline = true
