@@ -4,7 +4,7 @@ CMD ["bash"]
 FROM base AS test_build
 WORKDIR /app
 COPY . .
-ARG REACT_APP_API_URL
+ARG REACT_APP_API_SERVER
 RUN npm ci && npm run test && npm run build
 
 FROM nginx:latest AS prod
