@@ -1,20 +1,25 @@
 services:
   api:
     container_name: api
-    build:
+    build: 
       context: ./api
-      dockerfile: Dockerfile
+      target: base
+    image: argon/api
     ports:
       - 8080:8080
     volumes:
       - ./api:/app:cached
+    working_dir: /app
   web:
     container_name: web
-    build:
+    build: 
       context: ./web
-      dockerfile: Dockerfile
+      target: base
+    image: argon/web
     ports:
       - 3000:3000
     volumes:
       - ./web:/app:cached
-
+    environment:
+      - REACT_APP_API_SERVER=http://localhost:8080/api
+    working_dir: /app

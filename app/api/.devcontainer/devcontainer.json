@@ -1,8 +1,8 @@
 {
     "name": "api-container",
     "service": "api",
-    "workspaceFolder": "/workspace",
-    "dockerComposeFile": "../../docker-compose.yml",
+    "workspaceFolder": "/app",
+    "dockerComposeFile": "../../compose.yml",
     "customizations": {
         "vscode":{
             "extensions":[

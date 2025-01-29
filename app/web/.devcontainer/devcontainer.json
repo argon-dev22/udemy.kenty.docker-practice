@@ -1,8 +1,8 @@
 {
     "name": "web-container",
     "service": "web",
-    "workspaceFolder": "/workspace",
-    "dockerComposeFile": "../../docker-compose.yml",
+    "workspaceFolder": "/app",
+    "dockerComposeFile": "../../compose.yml",
     "customizations": {
         "vscode":{
             "extensions":[
