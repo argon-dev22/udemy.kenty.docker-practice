@@ -7,8 +7,8 @@ on:
 
 env:
   AWS_REGION: ap-northeast-1
-  ECS_SERVICE: udemy_kenty_docker-practice-ecs-service
-  ECS_CLUSTER: udemy_kenty_docker-practice-ecs-cluster
+  ECS_SERVICE: udemy_kenty_docker-practice_ecs-service
+  ECS_CLUSTER: udemy_kenty_docker-practice_ecs-cluster
   ECS_TASK_DEFINITION: .aws/task-definition.json
 
 permissions:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-20.04
     defaults:
       run:
-        working-directory: ./web
+        working-directory: ./app/web
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-20.04
     defaults:
       run:
-        working-directory: ./api
+        working-directory: ./app/api
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
