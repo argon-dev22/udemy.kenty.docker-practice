@@ -27,7 +27,7 @@ jobs:
 
       - name: Build an Image and Run Tests
         run: |
-          docker image build -t temp_web_image_name:latest --build-arg REACT_APP_API_URL=http://localhost:8080/api/ .
+          docker image build -t temp_web_image_name:latest --target prod --build-arg REACT_APP_API_URL=http://localhost:8080/api/ .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Build an Image and Run Tests
         run: |
-          docker image build -t temp_api_image_name:latest .
+          docker image build -t temp_api_image_name:latest --target prod .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -101,7 +101,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 既存のタスク定義を更新する
+      # 既存のタスク定義（.aws/task-definition.json）を更新する
       - name: Fill in the new image ID in the Amazon ECS task definition for web
         id: render-web-task-definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -110,7 +110,7 @@ jobs:
           container-name: web
           image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_WEB_SERVER_REPOSITORY }}
 
-      # 既存のタスク定義を更新する
+      # 上記のステップの成果物として出力されたタスク定義（WebのImageIDを更新したもの）を更新する
       - name: Fill in the new image ID in the Amazon ECS task definition for api
         id: render-api-task-definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -119,6 +119,7 @@ jobs:
           container-name: api
           image: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.AWS_ECR_API_SERVER_REPOSITORY }}
 
+      # 上記のステップの成果物として出力されたタスク定義（WebとAPIのImageIDを更新したもの）をサービスにデプロイする
       - name: Deploy to AWS ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
